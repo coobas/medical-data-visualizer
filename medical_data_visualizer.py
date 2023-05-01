@@ -1,7 +1,6 @@
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 import numpy as np
+import plotly.express as px
 
 
 def load_data(bmi_overweight=25):
@@ -26,29 +25,24 @@ def draw_cat_plot(df, split_by="cardio"):
     df_cat = pd.melt(
         df,
         id_vars=[split_by],
-        value_vars=["cholesterol", "gluc", "smoke", "alco", "active", "overweight"],
+        value_vars=["cholesterol", "gluc" , "smoke", "alco", "active", "overweight"],
     )
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
     df_cat = pd.DataFrame(
         df_cat.groupby([split_by, "variable", "value"]).size().reset_index(name="total")
-    )
+    ).astype({"value": "category"})
 
     # Draw the catplot with 'sns.catplot()'
-    sns_plot = sns.catplot(
+    fig = px.bar(
         df_cat,
         x="variable",
         y="total",
-        hue="value",
-        col=split_by,
-        kind="bar",
+        facet_col=split_by,
+        color="value",
+        barmode="group",
     )
 
-    # Get the figure for the output
-    fig = sns_plot.fig
-
-    # Do not modify the next two lines
-    fig.savefig("catplot.png")
     return fig
 
 
@@ -69,12 +63,8 @@ def draw_heat_map(df, outlier_quantile=0.025):
     # Generate a mask for the upper triangle
     mask = np.triu(np.ones_like(corr, dtype=bool))
 
-    # Set up the matplotlib figure
-    fig, ax = plt.subplots()
-
-    # Draw the heatmap with 'sns.heatmap()'
-    sns.heatmap(corr, mask=mask, ax=ax, annot=True, fmt=".1f")
-
-    # Do not modify the next two lines
-    fig.savefig("heatmap.png")
+    fig = px.imshow(
+        corr.where(~mask),
+        text_auto=".1f",
+    )
     return fig

@@ -1,7 +1,3 @@
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import numpy as np
 import streamlit as st
 
 from medical_data_visualizer import load_data, draw_cat_plot, draw_heat_map
