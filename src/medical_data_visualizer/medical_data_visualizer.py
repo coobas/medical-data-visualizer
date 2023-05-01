@@ -1,27 +1,27 @@
-# %%
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Import data
-df = pd.read_csv("medical_examination.csv")
 
-# Add 'overweight' column
-df["overweight"] = (df["weight"] / ((df["height"] / 100) ** 2) > 25).astype(int)
+def load_data():
+    # Import data
+    df = pd.read_csv("medical_examination.csv")
 
-# Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
+    # Add 'overweight' column
+    df["overweight"] = (df["weight"] / ((df["height"] / 100) ** 2) > 25).astype(int)
 
-df = df.assign(
-    cholesterol=np.minimum(df["cholesterol"] - 1, 1),
-    gluc=np.minimum(df["gluc"] - 1, 1),
-)
+    # Normalize data by making 0 always good and 1 always bad. If the value of 'cholesterol' or 'gluc' is 1, make the value 0. If the value is more than 1, make the value 1.
 
-# %%
+    df = df.assign(
+        cholesterol=np.minimum(df["cholesterol"] - 1, 1),
+        gluc=np.minimum(df["gluc"] - 1, 1),
+    )
+    return df
 
 
 # Draw Categorical Plot
-def draw_cat_plot():
+def draw_cat_plot(df):
     # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
     df_cat = pd.melt(
         df,
@@ -53,7 +53,7 @@ def draw_cat_plot():
 
 
 # Draw Heat Map
-def draw_heat_map():
+def draw_heat_map(df):
     # Clean the data
     df_heat = df[
         (df["ap_lo"] <= df["ap_hi"])
@@ -78,6 +78,3 @@ def draw_heat_map():
     # Do not modify the next two lines
     fig.savefig("heatmap.png")
     return fig
-
-
-# %%
