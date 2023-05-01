@@ -56,8 +56,8 @@ create your first Streamlit app 🎉 in a new `app.py` file:
 4. Publish the app using instructions at https://docs.streamlit.io/en/stable/deploy_streamlit_app.html.
 
 You will need to:
-    1. Install Poetry using instructions at https://python-poetry.org/docs/#installation.
-    2. Add Streamlit as a dependency via `poetry add streamlit` command.
-    3. Commit all changes and push to your GitHub repository.
+    1. Create a `requirements.txt` file containing the list of dependencies. See [pip documentation](https://pip.pypa.io/en/stable/reference/requirements-file-format/) for instructions. Remember you need to add all the primary dependencies, such as `pandas` or `seaborn`, and also `streamlit`. It is advisable to specify the versions of the dependencies, e.g. to pin the major versions using `~=`.
+    2. Commit all changes and push to your GitHub repository.
+    3. Publish the app and share the link 😏
 
 5. Change the plotting library to [Plotly Express](https://plotly.com/python/plotly-express/) and re-implement the plotting functions to use Plotly Express.
