@@ -17,7 +17,7 @@ st.dataframe(medical_data)
 st.header("Histogram visualization")
 
 hist_variable = st.selectbox(
-    "Select a variable to display as histogram", medical_data.columns,
+    "Select a variable to display as histogram", medical_data.columns, index=medical_data.columns.get_loc("smoke")
 )
 
 fig = px.histogram(
