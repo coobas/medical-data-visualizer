@@ -6,6 +6,19 @@ This project is adopted from the [freeCodeCamp](https://www.freecodecamp.org/)
 To start working on the project, you need to [**fork** this repository](https://github.com/coobas/medical-data-visualizer/fork) to your own GitHub account. Then, clone the new repository to your computer
 and start working on the project.
 
+## Conda virtual environment
+
+```
+conda create -n med-vis -c conda-forge python=3.11
+conda activate med-vis
+```
+
+Install necessary libriries
+```
+conda install streamlit pandas plotly
+```
+
+
 ## Part 1: Data processing and visualization
 
 Follow the freeCodeCamp instructions for building your project at https://www.freecodecamp.org/learn/data-analysis-with-python/data-analysis-with-python-projects/medical-data-visualizer
