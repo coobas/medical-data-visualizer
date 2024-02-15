@@ -15,7 +15,7 @@ conda activate med-vis
 
 Install necessary libriries
 ```
-conda install streamlit pandas plotly
+conda install streamlit pandas plotly seaborn matplotlib
 ```
 
 
